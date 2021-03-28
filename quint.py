@@ -41,8 +41,10 @@ def writeLogs():
     lastlog.close()
 def readOutputLog():
     with open('logs\\lastlog.json') as json_file:
-        reporting = json.load(json_file)
-    print(reporting['nmaprun']['host']['hostscript']['script']['@output'])
+        outputjson = json.load(json_file)
+        clippedoutput = outputjson['nmaprun']['host']['hostscript']['script']['@output']
+        main, extra = str(clippedoutput).split('>>>', 1)
+    print(main)
 
 match scantype.upper():
     case "FULL":
