@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import json
 import urllib.request
 from re import match
@@ -7,11 +8,12 @@ from os import path
 import argparse
 
 parser = argparse.ArgumentParser(description='QUick INTel - nmap and dns query wrapper.')
-parser.add_argument("-s", action="store", dest="scant", default="WHOISIP")
-parser.add_argument("-t", action="store", dest="targ", default="8.8.8.8")
+parser.add_argument("-s", action="store", dest="scant")
+parser.add_argument("-t", action="store", dest="targ")
 args = parser.parse_args()
-target = str(args.targ)
-scantype = str(args.scant)
+target = args.targ
+scantype = args.scant
+print(target, scantype)
 
 
 def dnsQuery(rrtype, target):
@@ -43,8 +45,15 @@ def readOutputLog():
     with open('logs\\lastlog.json') as json_file:
         outputjson = json.load(json_file)
         clippedoutput = outputjson['nmaprun']['host']['hostscript']['script']['@output']
-        main, extra = str(clippedoutput).split('>>>', 1)
-    print(main)
+        strclippedoutput = str(clippedoutput)
+        match strclippedoutput.find('>>>') != -1:
+            case True:
+                main, extra = str(clippedoutput).split('>>>', 1)
+                print(main)
+            case False:
+                print(strclippedoutput)
+            case _:
+                print('Your output is messed up')
 
 match scantype.upper():
     case "FULL":
