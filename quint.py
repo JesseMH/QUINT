@@ -8,6 +8,7 @@ from os import path
 import argparse
 from pathlib import Path
 
+
 parser = argparse.ArgumentParser()
 parser.add_argument('scant', nargs='?', type=str, help='help')
 parser.add_argument('targ', nargs='?', type=str, help='help')
