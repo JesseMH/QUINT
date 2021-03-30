@@ -3,7 +3,7 @@ QUIck INTel - A DNS record request and NMAP wrapper. Easier than having to go to
 
 # DEPENDENCIES
 1. Python 3.10
-  * I use structural pattern matching instead of if statements because I think they look better
+   * I use structural pattern matching instead of if statements because I think they look better
 2. Nmap
   * Used for some of their NSEs like WHOIS and WHOISIP, Full scans, etc. Not needed if you're just checking MX/A/CNAME/etc records, which queries google's dns. 
 4. XMLTODICT
